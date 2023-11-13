@@ -1,0 +1,11 @@
+<div id="days-list">
+    <div *ngIf="$processing | async; then loadingTemplate else contentTemplate"></div>
+    <ng-template #loadingTemplate>
+        <h3>Processing...</h3>
+    </ng-template>
+    <ng-template #contentTemplate>
+        <div *ngFor="let day of $days | async">
+            <h2>{{day.dayName}}</h2>
+        </div>
+    </ng-template>
+</div>
