@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
-import { DayI, GymProgramResponseI, RoutineI } from "../shared/interfaces";
+import { DayI, ExerciseI, GymProgramResponseI, RoutineI, SetI } from "../shared/interfaces";
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -21,17 +21,13 @@ export class RoutineService {
     this.http.get<GymProgramResponseI>(`${environment.API_URL}/get-routine`).subscribe((res) => this.daysSubject.next(res.routine.days))
   }
 
-  /*
-    public toggleTaskCompletion(taskId: number): void {
-      this.processingSubject.next(true);
-      const currentTasks = this.tasksSubject.value;
-      const taskToComplete = currentTasks.find(t => t.id === taskId);
-      if (taskToComplete) {
-        taskToComplete.completed = !taskToComplete.completed;
-        this.tasksSubject.next(currentTasks);
-      }
-      setTimeout(() => {
-        this.processingSubject.next(false);
-      }, 100)
-    }*/
+  public completeSet(dayId: string, exercise: ExerciseI, setIndex: Number) {
+    this.http.put(`${environment.API_URL}/complete-exercise-set`, {
+      dayId,
+      exerciseId: exercise.id,
+      setIndex
+    }).subscribe(() => {
+      this.loadDays();
+    })
+  }
 }

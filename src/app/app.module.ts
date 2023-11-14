@@ -7,11 +7,13 @@ import { DaysListComponent } from './components/days-list/days-list.component';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ExercisesListComponent } from './components/exercises-list/exercises-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DaysListComponent
+    DaysListComponent,
+    ExercisesListComponent
   ],
   imports: [
     BrowserModule,
@@ -23,4 +25,5 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

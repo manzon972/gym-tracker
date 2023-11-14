@@ -1,0 +1,33 @@
+<div id="exercises-list-component">
+    <div *ngIf="$processing | async; then loadingTemplate else contentTemplate"></div>
+    <ng-template #loadingTemplate>
+        <h3>Processing...</h3>
+    </ng-template>
+    <ng-template #contentTemplate>
+        <h1 class="text-center">Select an Exercise to start</h1>
+        <div class="inline-list">
+            <button *ngFor="let exercise of exercises" class="m-2"
+                    (click)="selectExercise(exercise)">{{exercise.exerciseName}}</button>
+        </div>
+        <div *ngIf="exercise" class="card">
+            <div class="inline-list">
+                <h4 class="mx-5">{{exercise.exerciseName}}</h4>
+                <h4 class="mx-5">Peso Max: {{exercise.maxWeight}}Lb</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-center" *ngIf="restTime !== REST_TIME">
+                    Great!, now rest for {{restTime * 1000 | date:'mm:ss'}}
+                </p>
+                <div *ngFor="let set of exercise.sets;index as setIndex" class="card">
+                    <div class="inline-list">
+                        <label class="m-1">Weight: </label>
+                        <input class="m-1" [disabled]="set.done" type="text" [value]="set.weight">
+                        <label class="m-1">Reps: </label>
+                        <input class="m-1" [disabled]="set.done" type="text" [value]="set.reps">
+                        <button class="m-2 p-3" [disabled]="set.done" (click)="completeSet(exercise,setIndex)">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
