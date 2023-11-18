@@ -19,12 +19,12 @@
                 <div *ngFor="let set of exercise.sets;index as setIndex" class="card">
                     <p class="m-1">Set #{{setIndex + 1}}</p>
                     <div class="inline-list">
-                        <label class="m-1 inline-item">Weight (Lb):</label>
-                        <input class="m-1 inline-item" [disabled]="set.done" type="text" [(ngModel)]="set.weight">
+                        <label class="my-1 inline-item">Weight (Lb):</label>
+                        <input class="my-1 inline-item" [disabled]="set.done" type="text" [(ngModel)]="set.weight">
                     </div>
                     <div class="inline-list">
-                        <label class="m-1 inline-item">Reps:</label>
-                        <input class="m-1 inline-item" [disabled]="set.done" type="text" [(ngModel)]="set.reps">
+                        <label class="my-1 inline-item">Reps:</label>
+                        <input class="my-1 inline-item" [disabled]="set.done" type="text" [(ngModel)]="set.reps">
                     </div>
                     <button class="m-2 p-3" [disabled]="set.done" (click)="completeSet(exercise,set,setIndex)">Done
                     </button>
