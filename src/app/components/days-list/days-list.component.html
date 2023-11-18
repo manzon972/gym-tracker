@@ -4,9 +4,9 @@
         <h3>Processing...</h3>
     </ng-template>
     <ng-template #contentTemplate>
-        <h1 class="text-center">Select a day to start</h1>
+        <h2 class="my-2 text-center">Select a day to start</h2>
         <div class="inline-list">
-            <button *ngFor="let day of $days | async" class="m-2" (click)="selectDay(day)">{{day.dayName}}</button>
+            <button class="m-2 inline-button" *ngFor="let day of $days | async" (click)="selectDay(day)">{{day.dayName}}</button>
         </div>
     </ng-template>
 </div>

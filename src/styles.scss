@@ -128,8 +128,13 @@
 .inline-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.inline-button {
+  flex-basis: 100%;
 }
 
 //text props styles

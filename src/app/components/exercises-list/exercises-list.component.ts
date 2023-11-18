@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Observable } from "rxjs";
-import { DayI, ExerciseI } from "../../shared/interfaces";
+import { DayI, ExerciseI, SetI } from "../../shared/interfaces";
 import { RoutineService } from "../../services/routine.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { REST_TIME } from "../../shared/constants";
@@ -41,8 +41,8 @@ export class ExercisesListComponent implements OnInit {
     this.exercise = exercise;
   }
 
-  completeSet(exercise: ExerciseI, setIndex: number) {
-    this.routineService.completeSet(this.dayId, exercise, setIndex);
+  completeSet(exercise: ExerciseI, set: SetI, setIndex: number) {
+    this.routineService.completeSet(this.dayId, exercise, set, setIndex);
     const restTimeInterval = setInterval(() => {
       this.restTime--;
       if (this.restTime === 0) {
@@ -50,6 +50,16 @@ export class ExercisesListComponent implements OnInit {
         clearInterval(restTimeInterval);
       }
     }, 1000)
+  }
+
+  resetExercise() {
+    if (this.exercise) {
+      this.routineService.resetExerciseSets(this.dayId, this.exercise);
+    }
+  }
+
+  goBack() {
+    this.router.navigate(['/'])
   }
 
   protected readonly REST_TIME = REST_TIME;

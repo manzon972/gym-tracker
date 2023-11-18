@@ -21,11 +21,21 @@ export class RoutineService {
     this.http.get<GymProgramResponseI>(`${environment.API_URL}/get-routine`).subscribe((res) => this.daysSubject.next(res.routine.days))
   }
 
-  public completeSet(dayId: string, exercise: ExerciseI, setIndex: Number) {
+  public completeSet(dayId: string, exercise: ExerciseI, set: SetI, setIndex: Number) {
     this.http.put(`${environment.API_URL}/complete-exercise-set`, {
       dayId,
+      set,
+      setIndex,
       exerciseId: exercise.id,
-      setIndex
+    }).subscribe(() => {
+      this.loadDays();
+    })
+  }
+
+  public resetExerciseSets(dayId: string, exercise: ExerciseI) {
+    this.http.put(`${environment.API_URL}/reset-exercise-sets`, {
+      dayId,
+      exerciseId: exercise.id,
     }).subscribe(() => {
       this.loadDays();
     })
